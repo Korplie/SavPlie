@@ -12,6 +12,7 @@ public:
 	Scene();
 	~Scene();
 	
+	std::list<GameObject*>&GetObjectList();
 	void Update();
 	std::list<GameObject*>objectList;
 	void AddGameObject(GameObject *obj);
@@ -34,6 +35,6 @@ T* Instantiate(D3DXVECTOR2 position)
 	GameManager::nowScene->AddGameObject(obj);
 
 	gameObject->position = position;
-	return gameObject;
+	return obj;
 }
 

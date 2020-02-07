@@ -8,13 +8,16 @@
 #include<d3dx9.h>
 using namespace std;
 class Component;
+class Animation;
 
 class GameObject
 {
 public:
 
 	GameObject();
-	~GameObject();
+	 ~GameObject();
+
+	Animation*animation;
 
 	D3DXVECTOR2 position;
 	D3DXVECTOR2 scale;
@@ -26,6 +29,8 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void OnDestroy();
+
+	void UpdateAnimation();
 
 
 	/*template<class T>
