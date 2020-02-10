@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include"Animation.h"
 
-GameObject::GameObject() :degree(0.0f),position({0.0f,0.0f}), scale({ 0.0f,0.0f }),isActive(true)
+GameObject::GameObject() :degree(0.0f),position({0.0f,0.0f}), scale({ 1.0f,1.0f }),isActive(true),sortingLayer(0)
 {
 	animation = new Animation();
 }

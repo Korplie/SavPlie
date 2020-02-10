@@ -38,14 +38,15 @@ void Animation::Update()
 
 void Animation::SetAnimation(std::string textureName)
 {
+	timePerFrame = -1;
 	this->textureName = textureName;
-	imageSize = GraphicManager::GetTextureSize(textureName);
+	frameSize=imageSize = GraphicManager::GetTextureSize(textureName);
 	lastChangeTime = clock();
 
 	if (textureName == "TestAni")
 	{
 		//clock_t 일초에 천 
-		timePerFrame = 1000;
+		timePerFrame = 500;
 		frameSize = { 32,32 };
 	}
 

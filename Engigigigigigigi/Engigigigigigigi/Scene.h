@@ -16,6 +16,7 @@ public:
 	void Update();
 	std::list<GameObject*>objectList;
 	void AddGameObject(GameObject *obj);
+	void CollisionCheck();
 private:
 	
 
@@ -32,9 +33,11 @@ T* Instantiate(D3DXVECTOR2 position)
 		delete obj;
 		return nullptr;
 	}
+	gameObject->position = position;
 	GameManager::nowScene->AddGameObject(obj);
 
-	gameObject->position = position;
+
+	
 	return obj;
 }
 
