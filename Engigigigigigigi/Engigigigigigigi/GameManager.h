@@ -10,7 +10,7 @@ public:
 	static void init(HWND hWnd);
 	static void Render();
 	static void Update();
-
+	static void sans();
 	static Scene* nowScene;
 
 	GameManager();

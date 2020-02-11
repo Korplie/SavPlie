@@ -17,6 +17,7 @@ public:
 
 	void Update() override;
 	void Awake()override;
+	void OnCollisionEnter(GameObject*gameObject) override;
 	void SetOption(D3DXVECTOR2 direction,float speed);
 };
 

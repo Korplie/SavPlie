@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Animation.h"
 #include"GraphicManager.h"
+#include"GameObject.h"
+#include"BoxCollider.h"
+
 
 RECT Animation::GetRect()
 {
@@ -40,7 +43,7 @@ void Animation::SetAnimation(std::string textureName)
 {
 	timePerFrame = -1;
 	this->textureName = textureName;
-	frameSize=imageSize = GraphicManager::GetTextureSize(textureName);
+	frameSize = imageSize = GraphicManager::GetTextureSize(textureName);
 	lastChangeTime = clock();
 
 	if (textureName == "TestAni")
@@ -49,10 +52,10 @@ void Animation::SetAnimation(std::string textureName)
 		timePerFrame = 500;
 		frameSize = { 32,32 };
 	}
-
+	parent->collider->size = frameSize;
 }
 
-Animation::Animation():textureName(""),imageSize({0.0f,0.0f}),frameSize({0.0f,0.0f}),nowFrame({0.0f,0.0f}),lastChangeTime(0),timePerFrame(-1)
+Animation::Animation() :textureName(""), imageSize({ 0.0f,0.0f }), frameSize({ 0.0f,0.0f }), nowFrame({ 0.0f,0.0f }), lastChangeTime(0), timePerFrame(-1)
 {
 }
 

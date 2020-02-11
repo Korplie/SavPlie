@@ -13,8 +13,12 @@ public:
 	static D3DXMATRIX matrix;
 	static D3DXVECTOR2 scale;
 	static float degree;
+	static void AddShake(float shake);
+
 
 	static int screenWidth;
 	static int screenHeight;
+
+	static float shake;
 };
 

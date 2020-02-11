@@ -6,6 +6,7 @@
 #include"Bullet.h"
 #include<Windows.h>
 #include"Scene.h"
+#include"GraphicManager.h"
 
 TestObj::TestObj()
 {
@@ -19,6 +20,7 @@ TestObj::~TestObj()
 void TestObj::Awake()
 {
 	animation->SetAnimation("TestAni");
+	name = "Player";
 	position = { 0.0f,0.0f };
 	sortingLayer = 1;
 	degree = 5;
@@ -34,6 +36,26 @@ void TestObj::Update()
 void TestObj::LateUpdate()
 {
 	CameraMove();
+}
+
+void TestObj::OnCollisionEnter(GameObject * gameObject)
+{
+	if (gameObject->name == "Enemy")
+	{
+
+		isActive = false;
+		gameObject->isActive = false;
+	}
+}
+
+void TestObj::OnDestroy()
+{
+	GameManager::nowScene->nextSceneName="Main";
+}
+
+void TestObj::OnRender()
+{
+	GraphicManager::DrawT("잉 테스트에연", {position });
 }
 
 void TestObj::PlayerMove()
@@ -76,11 +98,30 @@ void TestObj::MouseInput()
 	D3DXVec2Normalize(&normal, &diff);
 	if (InputManager::GetKey(InputManager::KeyCode::M0))
 	{
-		auto bullet=Instantiate<Bullet>(position);
+		auto bullet = Instantiate<Bullet>(position);
 		if (bullet != nullptr)
 		{
-			bullet->SetOption(normal, 10);
+			bullet->SetOption(normal, 40);
+			
 		}
 	}
-	
+	if (InputManager::GetKey(InputManager::KeyCode::M1)&&Camera::scale.x<1.5f)
+	{
+		Camera::scale.x += 0.01f;
+		Camera::scale.y += 0.01f;
+	}
+	if (InputManager::GetKey(InputManager::KeyCode::Space) && Camera::scale.x>0.5f)
+	{
+		Camera::scale.x -= 0.01f;
+		Camera::scale.y -= 0.01f;
+	}
+	if (InputManager::GetKey(InputManager::KeyCode::M1) && InputManager::GetKeDowny(InputManager::KeyCode::Space) )
+	{
+		GameManager::sans();
+	}
+	if (InputManager::GetKey(InputManager::KeyCode::M0) && InputManager::GetKeDowny(InputManager::KeyCode::Space))
+	{
+		isActive = true;
+	}
+
 }

@@ -3,14 +3,12 @@
 #include"Camera.h"
 #include"Scene.h"
 #include"GraphicManager.h"
-#include"TestObj.h"
-#include"BackGround.h"
 #include"InputManager.h"
-#include"Enemy.h"
 
- LPDIRECT3D9 GameManager::g_pD3D= LPDIRECT3D9();
- LPDIRECT3DDEVICE9 GameManager::g_pd3dDevice= LPDIRECT3DDEVICE9();
- Scene* GameManager::nowScene=nullptr;
+
+LPDIRECT3D9 GameManager::g_pD3D = LPDIRECT3D9();
+LPDIRECT3DDEVICE9 GameManager::g_pd3dDevice = LPDIRECT3DDEVICE9();
+Scene* GameManager::nowScene = nullptr;
 void GameManager::init(HWND hWnd)
 {
 	g_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
@@ -31,13 +29,7 @@ void GameManager::init(HWND hWnd)
 	InputManager::init(hWnd);
 
 	nowScene = new Scene();
-
-	Instantiate<TestObj>({ 0.0f,0.0f });
-	Instantiate<BackGround>({ 0.0f,0.0f });
-	Instantiate < Enemy > ({ 100,100 });
-	Instantiate < Enemy >({ -100,100 });
-	Instantiate < Enemy >({ -100,-100 });
-	Instantiate < Enemy >({ 100,-100 });
+	nowScene->ChangeScene("Main");
 }
 
 void GameManager::Render()
@@ -54,9 +46,18 @@ void GameManager::Render()
 
 void GameManager::Update()
 {
+	nowScene->CheackNextScene();
 	InputManager::Update();
 	nowScene->Update();
+	nowScene->CollisionCheck();
+	nowScene->LateUpdate();
 	Camera::Update();
+}
+
+void GameManager::sans()
+{
+	
+	GameManager::nowScene->nextSceneName = "Main";
 }
 
 
